@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VGU Map Web-Application: UI Design</title>
+
+<style>
+  body {
+    font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background: #f9fafb;
+    color: #2c2c2c;
+    line-height: 1.6;
+  }
+
+  h1.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.25em;
+    color: #111827;
+  }
+
+  p.page-description {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+  }
+
+  .page-body {
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  .column-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .column {
+    flex: 1 1 450px;
+    display: flex;
+    justify-content: center;
+  }
+
+  figure.image {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+    width: 100%;
+  }
+
+  figure.image:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  figure.image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+  }
+
+  figcaption {
+    padding: 0.8em;
+    font-size: 0.95rem;
+    color: #4b5563;
+    background-color: #f3f4f6;
+  }
+
+  figcaption em {
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* === MODAL POPUP === */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    overflow: hidden;
+    animation: popUp 0.3s ease;
+  }
+
+  @keyframes popUp {
+    from {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .modal-caption {
+    text-align: center;
+    color: white;
+    margin-top: 0.8em;
+    font-size: 1rem;
+  }
+
+  .close, .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .close:hover, .prev:hover, .next:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .close {
+    top: 5%;
+    right: 5%;
+    transform: none;
+  }
+
+  .prev {
+    left: 3%;
+  }
+
+  .next {
+    right: 3%;
+  }
+
+.footer {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-top: 3rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e5e7eb;
+  line-height: 1.4;
+}
+
+.footer strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.footer a {
+  color: #2563eb;
+  text-decoration: none;
+  margin: 0 0.2em;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.github-link svg {
+  vertical-align: middle;
+}
+
+  @media (max-width: 768px) {
+    h1.page-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <article class="page sans">
+    <header>
+      <h1 class="page-title">VGU Map Web-Application: UI Design</h1>
+      <p class="page-description">User interface overview of the web-based campus mapping system</p>
+    </header>
+
+    <div class="page-body">
+      <div class="column-list">
+        <div class="column">
+          <figure class="image">
+            <img src="image.png" alt="Homepage" data-caption="Image 1: Homepage">
+            <figcaption><em>Image 1: Homepage</em></figcaption>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="image">
+            <img src="image%201.png" alt="Login Page" data-caption="Image 2: Login Page">
+            <figcaption><em>Image 2: Login Page</em></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="column-list">
+        <div class="column">
+          <figure class="image">
+            <img src="image%202.png" alt="Register Page" data-caption="Image 3: Register Page">
+            <figcaption><em>Image 3: Register Page</em></figcaption>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="image">
+            <img src="image%203.png" alt="Reset Password Page 1" data-caption="Image 4: Reset Password Page (Step 1)">
+            <figcaption><em>Image 4: Reset Password Page (Step 1)</em></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="column-list">
+        <div class="column">
+          <figure class="image">
+            <img src="image%204.png" alt="Reset Password Page 2" data-caption="Image 5: Reset Password Page (Step 2)">
+            <figcaption><em>Image 5: Reset Password Page (Step 2)</em></figcaption>
+          </figure>
+        </div>
+
+        <div class="column">
+          <figure class="image">
+            <img src="image%205.png" alt="VGU Map Page" data-caption="Image 6: VGU Map Page">
+            <figcaption><em>Image 6: VGU Map Page</em></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Modal -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <span class="prev">&#10094;</span>
+    <span class="next">&#10095;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+<script>
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const modalCaption = document.getElementById("modalCaption");
+  const closeBtn = document.querySelector(".close");
+  const nextBtn = document.querySelector(".next");
+  const prevBtn = document.querySelector(".prev");
+
+  const images = Array.from(document.querySelectorAll("figure.image img"));
+  let currentIndex = 0;
+
+  function openModal(index) {
+    currentIndex = index;
+    const img = images[index];
+    modal.style.display = "flex";
+    modalImg.src = img.src;
+    modalCaption.textContent = img.getAttribute("data-caption");
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % images.length;
+    openModal(currentIndex);
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openModal(currentIndex);
+  }
+
+  images.forEach((img, i) => {
+    img.addEventListener("click", () => openModal(i));
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  nextBtn.addEventListener("click", showNext);
+  prevBtn.addEventListener("click", showPrev);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowRight") showNext();
+    if (e.key === "ArrowLeft") showPrev();
+  });
+</script>
+</body>
+
+<footer class="footer">
+  <p>
+    Made with ❤️ by <strong>Khoa Tran Nguyen</strong> • 
+    Contact: <a href="mailto:10423060@student.vgu.edu.vn">10423060@student.vgu.edu.vn</a> • 
+    <a href="https://github.com/KhoaTranNguyen/VGU-Interactive-Map-Application" target="_blank" class="github-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.262.82-.582 
+        0-.287-.01-1.045-.015-2.05-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.744.083-.729.083-.729 
+        1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.807 1.305 3.492.997.108-.776.42-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.934 
+        0-1.31.468-2.38 1.236-3.22-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404 
+        11.48 11.48 0 0 1 3.003.404c2.292-1.552 3.3-1.23 3.3-1.23.653 1.653.24 2.873.117 3.176.768.84 1.236 1.91 
+        1.236 3.22 0 4.61-2.803 5.63-5.475 5.924.432.372.816 1.102.816 2.222 
+        0 1.606-.015 2.902-.015 3.297 0 .322.216.702.825.582C20.565 21.795 24 17.295 24 12 
+        24 5.37 18.63 0 12 0z"/>
+      </svg>
+      GitHub
+    </a>
+  </p>
+</footer>
+
+</html>
