@@ -183,7 +183,18 @@ document.body.className += ' jsenabled';
             <span class="sr-only">There are 0 unread conversations</span>
         </div>
     </a>
-    <span class="sr-only sr-only-focusable" data-region="jumpto" tabindex="-1"></span></div><div class="popover-region" id="local-mail-navbar"><div class="local-mail local-mail-navbar pop-over-region h-100 svelte-1fx09ec"><a aria-expanded="false" class="nav-link btn h-100 position-relative d-flex align-items-center px-2 py-0 rounded-0" href="https://moodle.vgu.edu.vn/local/mail/view.php?t=inbox" title="Mail"><i class="fa fa-fw fa-envelope-o icon m-0"></i> </a> </div></div><script>
+<div class="popover-region" id="local-mail-navbar">
+  <div class="local-mail local-mail-navbar pop-over-region h-100 svelte-1fx09ec">
+    <a
+      aria-expanded="false"
+      class="nav-link btn h-100 position-relative d-flex align-items-center px-2 py-0 rounded-0"
+      href="https://moodle.vgu.edu.vn/local/mail/view.php?t=inbox"
+      title="Mail"
+    >
+      <span style="font-size:1.2em;">✉️</span>
+    </a>
+  </div>
+</div>
 //<![CDATA[
 window.local_mail_navbar_data = {"userid":2207,"courseid":810,"settings":{"enablebackup":true,"maxrecipients":100,"usersearchlimit":100,"maxfiles":20,"maxbytes":104857600,"autosaveinterval":5,"globaltrays":["starred","sent","drafts","trash"],"coursetrays":"none","coursetraysname":"fullname","coursebadges":"fullname","coursebadgeslength":20,"filterbycourse":"fullname","incrementalsearch":true,"incrementalsearchlimit":1000,"courselink":"hidden","messageprocessors":[{"name":"popup","displayname":"Web","locked":true,"enabled":true},{"name":"email","displayname":"Email","locked":false,"enabled":true},{"name":"airnotifier","displayname":"Mobile","locked":false,"enabled":true}]},"strings":{"allcourses":"All courses","bcc":"Bcc","cc":"Cc","changecourse":"Change course","compose":"Compose","course":"Course","drafts":"Drafts","inbox":"Inbox","nocoursematchestext":"No course matches the entered text","pluginname":"Mail","preferences":"Preferences","sendmail":"Send mail","sentplural":"Sent","starredplural":"Starred","to":"To","trash":"Trash"},"courses":[{"id":801,"shortname":"Algorithms and Data Structure SS25","fullname":"Algorithms and Data Structure - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1232,"shortname":"Computer Network -1 WS25 G1","fullname":"Computer Network -1 - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1231,"shortname":"Databases WS25 ","fullname":"Databases","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":800,"shortname":"Discrete Maths SS25","fullname":"Discrete Maths - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":810,"shortname":"Introduction to Data Science and AI SS25","fullname":"Introduction to Data Science and AI - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":808,"shortname":"IoT and Smart Devices SS25","fullname":"IoT and Smart Devices - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1965,"shortname":"Moodle Training for Student","fullname":"Moodle Training for Student","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1240,"shortname":"MoodleTrainingforLecturers","fullname":"Moodle Training for Lecturers","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1236,"shortname":"Object-oriented Programming with Java  WS25 G1","fullname":"Object-oriented Programming with Java - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1234,"shortname":"Operating Systems WS25 G1","fullname":"Operating Systems - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1221,"shortname":"Programming - 1 WS25 G1","fullname":"61CSE103\/Programming - 1\/Winter Sem 2025 (Sep 15 - Mar 15)\/WS2025_61CSE103_G1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":804,"shortname":"Programming 2 SS25","fullname":"Programming 2 - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1229,"shortname":"Software Engineering 1 WS25 G1","fullname":"Software Engineering 1 - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1155,"shortname":"SOGER5_2025","fullname":"SOGER_5_Ms. Son &amp; Mr. Beck - Das Leben B1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":1227,"shortname":"Statistics WS25 G1","fullname":"Statistics - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0},{"id":806,"shortname":"Theoretical Computer Science SS25","fullname":"Theoretical Computer Science - Group 1","visible":true,"groupmode":0,"unread":0,"drafts":0}],"labels":[]}
 //]]>
@@ -597,8 +608,15 @@ window.local_mail_navbar_data = {"userid":2207,"courseid":810,"settings":{"enabl
                 <nav class="tertiary-navigation-selector">
                     <div class="dropdown select-menu" id="select-menu68e652744c2205">
                             <label id="select-menu68e652744c2205-label" class="sr-only">Gradebook navigation menu</label>
-                        <div class="btn dropdown-toggle" role="combobox" data-toggle="dropdown" aria-labelledby="select-menu68e652744c2205-label" aria-haspopup="listbox" aria-expanded="false" aria-controls="select-menu68e652744c2205-listbox" data-input-element="select-menu68e652744c2205-input" tabindex="0">
-                            User report
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" id="userReportBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                                User report 🔽
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="userReportBtn">
+                                <li><a href="#">Download report</a></li>
+                                <li><a href="#">View analytics</a></li>
+                                <li><a href="#">Settings</a></li>
+                            </ul>
                         </div>
                         <ul class="dropdown-menu" role="listbox" id="select-menu68e652744c2205-listbox" aria-labelledby="select-menu68e652744c2205-label">
                                     <li role="none">
@@ -607,9 +625,25 @@ window.local_mail_navbar_data = {"userid":2207,"courseid":810,"settings":{"enabl
                                                 <li class="dropdown-item" role="option" id="select-menu-option68e652744c2207" data-value="https://moodle.vgu.edu.vn/grade/report/overview/index.php?id=810">
                                                     Overview report
                                                 </li>
-                                                <li class="dropdown-item" role="option" id="select-menu-option68e652744c2208" data-value="https://moodle.vgu.edu.vn/grade/report/user/index.php?id=810" aria-selected="true">
-                                                    User report
-                                                </li>
+                                                <a href="#" role="button" id="user-menu-toggle" data-toggle="dropdown" aria-label="User menu"
+                                                    aria-haspopup="true" aria-controls="user-action-menu"
+                                                    class="btn dropdown-toggle" style="display:flex;align-items:center;gap:8px;">
+                                                    <span class="userbutton" style="display:flex;align-items:center;gap:8px;">
+                                                        <span class="avatars">
+                                                        <span class="avatar current">
+                                                            <span class="userinitials size-35"
+                                                                title="Tran Nguyen Khoa"
+                                                                aria-label="Tran Nguyen Khoa"
+                                                                role="img"
+                                                                style="background:#345fcb;color:white;border-radius:50%;width:35px;height:35px;
+                                                                        display:flex;align-items:center;justify-content:center;font-weight:bold;">
+                                                            TK
+                                                            </span>
+                                                        </span>
+                                                        </span>
+                                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                                </span>
+                                            </a>
                                         </ul>
                                     </li>
                         </ul>
