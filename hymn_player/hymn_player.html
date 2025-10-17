@@ -11,84 +11,177 @@
   
   <style>
     body {
-      font-family: 'Inter', sans-serif; /* A clean sans-serif font */
+      font-family: 'Inter', sans-serif;
     }
-    .main-nav a {
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 500;
-      color: #374151; /* gray-700 */
-      transition: color 0.2s ease-in-out;
+
+    /* We hide the default audio controls */
+    audio {
+      display: none;
     }
-    .main-nav a:hover {
-      color: #111827; /* gray-900 */
-    }
+
+    /* Custom styles for the playlist */
     #playlist li {
-      padding: 1rem 1.5rem; /* Increased padding for list items */
-      border-bottom: 1px solid #e5e7eb; /* Light gray border */
+      padding: 0.75rem 1.25rem; /* 12px 20px */
+      border-bottom: 1px solid #374151; /* gray-700 */
       transition: background-color 0.2s ease-in-out;
       cursor: pointer;
     }
+
     #playlist li:hover {
-      background-color: #f9fafb; /* Very light gray on hover */
+      background-color: #374151; /* gray-700 */
     }
+
     #playlist li:last-child {
-      border-bottom: none; /* No border for the last item */
+      border-bottom: none;
     }
+
+    /* This yellow provides a great "Hi-Fi" accent color */
     #playlist li.active {
-      background-color: #fef08a; /* A light yellow for active, similar to the image's subtle highlight */
-      color: #1f2937; /* Darker text for active item */
+      background-color: #fef08a; /* yellow-200 */
+      color: #1f2937; /* gray-800 */
+      font-weight: 600;
+    }
+
+    /* A subtle scrollbar for the playlist */
+    #playlist-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    #playlist-container::-webkit-scrollbar-track {
+      background: #374151; /* gray-700 */
+      border-radius: 10px;
+    }
+    #playlist-container::-webkit-scrollbar-thumb {
+      background: #6b7280; /* gray-500 */
+      border-radius: 10px;
+    }
+    #playlist-container::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af; /* gray-400 */
     }
   </style>
 </head>
-<body class="bg-white text-gray-800 antialiased">
+<body class="bg-gray-900 text-gray-300 antialiased flex items-center justify-center min-h-screen p-4">
 
-  <header class="w-full max-w-7xl mx-auto py-8 px-4">
-    <nav class="main-nav flex justify-center space-x-8">
-      <a href="#" class="text-gray-700 hover:text-gray-900">Home</a>
-      <a href="#" class="text-gray-700 hover:text-gray-900">About</a>
-      <a href="#" class="text-gray-700 hover:text-gray-900">Playlist (A to Z)</a>
-      <a href="#" class="text-gray-700 hover:text-gray-900">By Category</a>
-      <a href="#" class="text-gray-700 hover:text-gray-900">Contact</a>
-    </nav>
-  </header>
+  <div class="w-full max-w-6xl mx-auto flex flex-col lg:flex-row bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
 
-  <main class="w-full max-w-7xl mx-auto mt-12 flex flex-col md:flex-row gap-8 px-4">
-
-    <div class="md:w-1/2 lg:w-2/5">
-      <div class="relative w-full h-80 bg-gray-200 flex items-center justify-center overflow-hidden rounded-md shadow-sm">
-        <img src="https://via.placeholder.com/600x400/2C3E50/FFFFFF?text=Album+Art" alt="Album Cover" class="w-full h-full object-cover">
-        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-            <svg class="h-16 w-16 text-white opacity-90 cursor-pointer" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-            </svg>
+    <div class="w-full lg:w-2/5 p-6 sm:p-8">
+      
+      <div class="relative rounded-lg overflow-hidden shadow-lg mb-6">
+        <img id="album-art-img" src="https://via.placeholder.com/600x600/2C3E50/FFFFFF?text=Album+Art" alt="Album Cover" class="w-full block">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end">
+          <h2 id="song-title" class="text-2xl font-bold text-white tracking-wide">Select a Song</h2>
+          <p id="song-artist" class="text-sm text-yellow-200 uppercase tracking-wider font-medium">Artist Name</p>
         </div>
       </div>
-      
-      <h2 class="text-xl font-bold uppercase mt-6 tracking-wide text-gray-700">MY ALBUM PLAYLIST</h2>
-      
-      <div class="mt-4 text-gray-600 space-y-2">
-        <p>A collection of beautiful tracks.</p>
-        <p class="text-sm">Click a song to play.</p>
-      </div>
 
-      <div class="mt-6 flex justify-between items-center space-x-4">
-        <button id="prev" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-full text-sm">⏮ Prev</button>
-        <audio id="audio" controls class="flex-auto max-w-[calc(100%-8rem)] rounded-full"></audio>
-        <button id="next" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-full text-sm">Next ⏭</button>
-      </div>
+      <div class="space-y-4">
+        
+        <div class="space-y-1">
+          <div id="progress-bar" class="w-full h-1.5 bg-gray-600 rounded-full cursor-pointer">
+            <div id="progress" class="h-1.5 bg-yellow-300 rounded-full" style="width: 0%;"></div>
+          </div>
+          <div class="flex justify-between text-xs font-medium text-gray-400">
+            <span id="current-time">0:00</span>
+            <span id="total-time">0:00</span>
+          </div>
+        </div>
 
+        <audio id="audio"></audio>
+
+        <div class="flex items-center justify-between">
+          <button id="shuffle-button" class="text-gray-400 hover:text-white transition-colors" title="Shuffle">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3h5v5M4 20L21 3m0 13v5h-5M4 4l7 7"></path></svg>
+          </button>
+          
+          <div class="flex items-center space-x-6">
+            <button id="prev-button" class="text-gray-300 hover:text-white transition-colors" title="Previous">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.445 14.832A1 1 0 0010 14V6a1 1 0 00-1.555-.832L4 8l4.445 6.832zM10.445 14.832A1 1 0 0012 14V6a1 1 0 00-1.555-.832L6 8l4.445 6.832z"></path></svg>
+            </button>
+
+            <button id="play-pause-button" class="w-14 h-14 flex items-center justify-center bg-yellow-300 text-gray-900 rounded-full shadow-lg hover:bg-yellow-200 transition-all" title="Play">
+              <svg id="play-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+              <svg id="pause-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+
+            <button id="next-button" class="text-gray-300 hover:text-white transition-colors" title="Next">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.555 5.168A1 1 0 0010 6v8a1 1 0 001.555.832L16 12l-4.445-6.832zM9.555 5.168A1 1 0 008 6v8a1 1 0 001.555.832L14 12 9.555 5.168z"></path></svg>
+            </button>
+          </div>
+          
+          <button id="repeat-button" class="text-gray-400 hover:text-white transition-colors" title="Repeat">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9M3.204 13A8.001 8.001 0 0019.418 15M20 20v-5h-.582M4.582 15A8.001 8.001 0 0019.418 13"></path></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="md:w-1/2 lg:w-3/5 bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">
-      <h3 class="sr-only">Playlist</h3> <div id="player-container">
-        <p id="song-title" class="px-6 py-4 text-gray-700 font-semibold text-lg border-b border-gray-200">No song playing</p>
+    <div class="w-full lg:w-3/5 bg-gray-800/50">
+      <div id="playlist-container" class="max-h-[30rem] lg:max-h-[38rem] overflow-y-auto">
         <ul id="playlist">
-          </ul>
+          <li data-src="path/to/song1.mp3" data-title="Sunset Drive" data-artist="AudioNautix" data-img="https://via.placeholder.com/600x600/FF5733/FFFFFF?text=Art+1">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex items-center space-x-4">
+                <span class="text-sm font-medium text-gray-400 w-4">1.</span>
+                <div>
+                  <p class="font-medium text-white">Sunset Drive</p>
+                  <p class="text-sm text-gray-400">AudioNautix</p>
+                </div>
+              </div>
+              <span class="text-sm text-gray-400">3:45</span>
+            </div>
+          </li>
+          <li class="active" data-src="path/to/song2.mp3" data-title="Mountain King" data-artist="Myuu" data-img="https://via.placeholder.com/600x600/33FF57/FFFFFF?text=Art+2">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex items-center space-x-4">
+                <span class="text-sm font-medium w-4">2.</span>
+                <div>
+                  <p class="font-medium">Mountain King</p>
+                  <p class="text-sm text-gray-500">Myuu</p>
+                </div>
+              </div>
+              <span class="text-sm text-gray-500">4:02</span>
+            </div>
+          </li>
+          <li data-src="path/to/song3.mp3" data-title="Chasing Stars" data-artist="NEFFEX" data-img="https://via.placeholder.com/600x600/3357FF/FFFFFF?text=Art+3">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex items-center space-x-4">
+                <span class="text-sm font-medium text-gray-400 w-4">3.</span>
+                <div>
+                  <p class="font-medium text-white">Chasing Stars</p>
+                  <p class="text-sm text-gray-400">NEFFEX</p>
+                </div>
+              </div>
+              <span class="text-sm text-gray-400">2:58</span>
+            </div>
+          </li>
+          <li data-src="path/to/song4.mp3" data-title="Deep Dive" data-artist="RKVC" data-img="https://via.placeholder.com/600x600/FF33A1/FFFFFF?text=Art+4">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex items-center space-x-4">
+                <span class="text-sm font-medium text-gray-400 w-4">4.</span>
+                <div>
+                  <p class="font-medium text-white">Deep Dive</p>
+                  <p class="text-sm text-gray-400">RKVC</p>
+                </div>
+              </div>
+              <span class="text-sm text-gray-400">3:15</span>
+            </div>
+          </li>
+           <li data-src="path/to/song5.mp3" data-title="Echoes of Time" data-artist="Ann Annie" data-img="https://via.placeholder.com/600x600/A133FF/FFFFFF?text=Art+5">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex items-center space-x-4">
+                <span class="text-sm font-medium text-gray-400 w-4">5.</span>
+                <div>
+                  <p class="font-medium text-white">Echoes of Time</p>
+                  <p class="text-sm text-gray-400">Ann Annie</p>
+                </div>
+              </div>
+              <span class="text-sm text-gray-400">5:10</span>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
-  </main>
+  </div>
 
   <script src="hymn_script.js"></script>
 </body>
