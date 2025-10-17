@@ -1,5 +1,16 @@
 // Define the folder where your music and playlist.json are located
-const albumFolder = "music/Various Artists - Spirit & Song Disc C (2013) [16B-44.1kHz]/";
+const albumFolder = "music/various-spirit-song-disc-c-2013/";
+
+const body = document.body;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  body.classList.add(savedTheme);
+
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const newTheme = body.classList.contains('dark') ? 'light' : 'dark';
+    body.classList.toggle('dark');
+    body.classList.toggle('light');
+    localStorage.setItem('theme', newTheme);
+  });
 
 /**
  * Asynchronously loads the playlist from the JSON file.

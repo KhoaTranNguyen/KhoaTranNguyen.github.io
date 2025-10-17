@@ -45,8 +45,8 @@
   }
 
   .album-cover img {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     object-fit: cover;
     filter: brightness(0.95);
     transition: filter 0.3s ease;
@@ -61,8 +61,8 @@
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
     background: rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -161,27 +161,35 @@
   }
   </style>
 </head>
-<body class="light text-gray-800 antialiased">
+<body class="dark text-gray-100 antialiased transition-colors duration-300 bg-black">
 
-  <button class="theme-toggle" onclick="document.body.classList.toggle('dark'); document.body.classList.toggle('light');">
-    Toggle Theme
+  <button 
+    class="theme-toggle fixed top-4 right-4 p-3 rounded-full border border-gray-600 
+           transition-all duration-300 bg-white text-black dark:bg-black dark:text-white"
+    onclick="document.body.classList.toggle('dark'); document.body.classList.toggle('light');"
+    aria-label="Toggle theme">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 2a8 8 0 000 16 8 8 0 010-16zM10 4a6 6 0 100 12A6 6 0 0010 4z"/>
+    </svg>
   </button>
 
   <main class="w-full max-w-7xl mx-auto mt-12 flex flex-col md:flex-row gap-8 px-4">
 
     <div class="md:w-1/2 lg:w-2/5">
       <div class="relative w-64 h-64 bg-gray-200 flex items-center justify-center overflow-hidden rounded-lg shadow-lg mx-auto">
-        <img src="hymn_player/music/Various Artists - Spirit & Song Disc C (2013) [16B-44.1kHz]/cover.jpg"
-            alt="Album Cover"
-            class="w-full h-full object-cover">
-        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-          <svg class="h-12 w-12 text-white opacity-90 cursor-pointer" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                  clip-rule="evenodd" />
+        <img
+          src="hymn_player/music/various-spirit-song-disc-c-2013/cover.jpg"
+          alt="Album Cover"
+          class="w-full h-full object-cover">
+        <!-- translucent overlay with play icon (doesn't replace cover) -->
+        <button class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30"
+                aria-label="Play album">
+          <svg class="h-12 w-12 text-white opacity-90 pointer-events-none" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
           </svg>
-        </div>
+        </button>
       </div>
+
       
       <h2 class="text-xl font-bold uppercase mt-6 tracking-wide text-gray-700">MY ALBUM PLAYLIST</h2>
       
