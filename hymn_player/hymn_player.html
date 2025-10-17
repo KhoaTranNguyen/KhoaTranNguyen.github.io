@@ -3,25 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My 24-bit Music Player</title>
+  <title>My Music Player</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif; /* A clean sans-serif font */
+    }
+    .main-nav a {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      color: #374151; /* gray-700 */
+      transition: color 0.2s ease-in-out;
+    }
+    .main-nav a:hover {
+      color: #111827; /* gray-900 */
+    }
+    #playlist li {
+      padding: 1rem 1.5rem; /* Increased padding for list items */
+      border-bottom: 1px solid #e5e7eb; /* Light gray border */
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer;
+    }
+    #playlist li:hover {
+      background-color: #f9fafb; /* Very light gray on hover */
+    }
+    #playlist li:last-child {
+      border-bottom: none; /* No border for the last item */
+    }
+    #playlist li.active {
+      background-color: #fef08a; /* A light yellow for active, similar to the image's subtle highlight */
+      color: #1f2937; /* Darker text for active item */
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
+<body class="bg-white text-gray-800 antialiased">
 
-  <h1 class="text-3xl font-bold mb-4">🎶 My 24-bit Music Player</h1>
+  <header class="w-full max-w-7xl mx-auto py-8 px-4">
+    <nav class="main-nav flex justify-center space-x-8">
+      <a href="#" class="text-gray-700 hover:text-gray-900">Home</a>
+      <a href="#" class="text-gray-700 hover:text-gray-900">About</a>
+      <a href="#" class="text-gray-700 hover:text-gray-900">Playlist (A to Z)</a>
+      <a href="#" class="text-gray-700 hover:text-gray-900">By Category</a>
+      <a href="#" class="text-gray-700 hover:text-gray-900">Contact</a>
+    </nav>
+  </header>
 
-  <div id="player" class="bg-gray-800 p-6 rounded-2xl shadow-lg w-full max-w-md text-center">
-    <p id="song-title" class="text-lg font-semibold mb-3">No song playing</p>
+  <main class="w-full max-w-7xl mx-auto mt-12 flex flex-col md:flex-row gap-8 px-4">
 
-    <audio id="audio" controls class="w-full mb-3"></audio>
+    <div class="md:w-1/2 lg:w-2/5">
+      <div class="relative w-full h-80 bg-gray-200 flex items-center justify-center overflow-hidden rounded-md shadow-sm">
+        <img src="https://via.placeholder.com/600x400/2C3E50/FFFFFF?text=Album+Art" alt="Album Cover" class="w-full h-full object-cover">
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+            <svg class="h-16 w-16 text-white opacity-90 cursor-pointer" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+        </div>
+      </div>
+      
+      <h2 class="text-xl font-bold uppercase mt-6 tracking-wide text-gray-700">MY ALBUM PLAYLIST</h2>
+      
+      <div class="mt-4 text-gray-600 space-y-2">
+        <p>A collection of beautiful tracks.</p>
+        <p class="text-sm">Click a song to play.</p>
+      </div>
 
-    <div class="flex justify-between">
-      <button id="prev" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">⏮ Prev</button>
-      <button id="next" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">Next ⏭</button>
+      <div class="mt-6 flex justify-between items-center space-x-4">
+        <button id="prev" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-full text-sm">⏮ Prev</button>
+        <audio id="audio" controls class="flex-auto max-w-[calc(100%-8rem)] rounded-full"></audio>
+        <button id="next" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-full text-sm">Next ⏭</button>
+      </div>
+
     </div>
 
-    <ul id="playlist" class="mt-4 text-left space-y-1"></ul>
-  </div>
+    <div class="md:w-1/2 lg:w-3/5 bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">
+      <h3 class="sr-only">Playlist</h3> <div id="player-container">
+        <p id="song-title" class="px-6 py-4 text-gray-700 font-semibold text-lg border-b border-gray-200">No song playing</p>
+        <ul id="playlist">
+          </ul>
+      </div>
+    </div>
+
+  </main>
 
   <script src="hymn_script.js"></script>
 </body>
