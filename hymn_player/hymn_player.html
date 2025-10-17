@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My 24-bit Music Player</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" />
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+  <h1 class="text-3xl font-bold mb-4">🎶 My 24-bit Music Player</h1>
+
+  <div id="player" class="bg-gray-800 p-6 rounded-2xl shadow-lg w-full max-w-md text-center">
+    <p id="song-title" class="text-lg font-semibold mb-3">No song playing</p>
+
+    <audio id="audio" controls class="w-full mb-3"></audio>
+
+    <div class="flex justify-between">
+      <button id="prev" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">⏮ Prev</button>
+      <button id="next" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">Next ⏭</button>
+    </div>
+
+    <ul id="playlist" class="mt-4 text-left space-y-1"></ul>
+  </div>
+
+  <script src="hymn_script.js"></script>
+</body>
+</html>
